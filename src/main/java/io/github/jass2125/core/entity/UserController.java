@@ -32,7 +32,19 @@ public class UserController implements Serializable {
         this.user = user;
     }
 
-    public void print() {
-        userService.login(user);
+    public UserPrincipal login() {
+        try {
+            return userService.login(user);
+        } catch (NoUserException e) {
+        }
+        return null;
+    }
+
+    public String login2() {
+        UserPrincipal login = login();
+        if (login != null) {
+            return "home.xhtml?faces-redirect=true";
+        }
+        return "index.xhtml";
     }
 }
