@@ -5,15 +5,17 @@
  */
 package io.github.jass2125.core.entity;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  * @since Mar 15, 2018 3:25:27 PM
  */
+@Stateless
 public class PasswordEncriptorSHA implements PasswordEncriptor {
 
-    @Inject
+    @EJB
     private GeneratorAlgorithmCryptography cryptographer;
     private String passwordToCryptography;
     private String passwordEncrypted;
@@ -21,7 +23,7 @@ public class PasswordEncriptorSHA implements PasswordEncriptor {
     public PasswordEncriptorSHA() {
     }
 //    public PasswordEncriptorSHA() {
-//        this.cryptographer = new GeneratorAlgorithmCryptography();
+//        this.cryptographer = new GeneratorAlgorithmCryptographyImp();
 //    }
 
     public void setPasswordEncrypted(String passwordEncrypted) {
@@ -48,12 +50,6 @@ public class PasswordEncriptorSHA implements PasswordEncriptor {
 
     private boolean verifyIfPasswordIsEquals() {
         return passwordToCryptography.equals(passwordEncrypted);
-    }
-
-    public static void main(String[] args) {
-        PasswordEncriptorSHA pass = new PasswordEncriptorSHA();
-        String encryptPassword = pass.encryptPassword("123");
-        System.out.println(encryptPassword);
     }
 
 }

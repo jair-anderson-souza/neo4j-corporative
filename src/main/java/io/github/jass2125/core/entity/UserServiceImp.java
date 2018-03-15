@@ -7,7 +7,6 @@ package io.github.jass2125.core.entity;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -15,16 +14,21 @@ import javax.inject.Inject;
  */
 @Stateless
 public class UserServiceImp implements UserService {
-    
+
     @EJB
     private UserDao userDao;
-    @Inject
+    @EJB
     private PasswordEncriptor passwordEncryptor;
+
     @Override
     public UserPrincipal login(UserPrincipal user) {
-        String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
-        user.setPassword(encryptedPassword);
-        return userDao.findUserByEmailAndPassword(user);
+        try {
+            String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
+            user.setPassword(encryptedPassword);
+            return userDao.findUserByEmailAndPassword(user);
+        } catch (NoUserException e) {
+            throw e;
+        }
     }
 
 }
