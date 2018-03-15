@@ -7,18 +7,28 @@ package io.github.jass2125.core.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  * @since Mar 14, 2018 4:06:04 PM
  */
-public class User implements Serializable {
+@Entity
+public class UserPrincipal implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String email;
-    private String password;
+    private String name;
+    @Embedded
+    private Account account;
 
-    public User() {
+    public UserPrincipal() {
+        this.account = new Account();
     }
 
     public Long getId() {
@@ -29,26 +39,34 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return account.getEmail();
     }
 
     public String getPassword() {
-        return password;
+        return account.getPassword();
+    }
+
+    public void setEmail(String email) {
+        this.account.setEmail(email);
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.account.setPassword(password);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.email);
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -63,13 +81,13 @@ public class User implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final UserPrincipal other = (UserPrincipal) obj;
         return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "User{" + "email=" + email + ", password=" + password + '}';
+        return "UserPrincipal{" + "id=" + id + ", name=" + name + ", account=" + account + '}';
     }
 
 }
