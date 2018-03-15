@@ -8,10 +8,10 @@
     <h:body>
         <h:form>
             <h:outputLabel value="Email"/>
-            <h:inputText value="#{loginController.user.email}"/>
+            <h:inputText value="#{userController.user.email}"/>
             <h:outputLabel value="Senha"/>
-            <h:inputSecret value="#{loginController.user.password}"/>
-            <h:commandButton value="Login" actionListener="#{loginController.print()}"/>
+            <h:inputSecret value="#{userController.user.password}"/>
+            <h:commandButton value="Login" actionListener="#{userController.print()}"/>
         </h:form>
     </h:body>
 </html>
