@@ -6,6 +6,8 @@
 package io.github.jass2125.core.entity;
 
 import java.io.Serializable;
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -14,20 +16,23 @@ import javax.inject.Named;
  * @since Mar 14, 2018 4:45:39 PM
  */
 @Named
-public class LoginController implements Serializable {
+@RequestScoped
+public class UserController implements Serializable {
 
     @Inject
-    private User user;
+    private UserPrincipal user;
+    @EJB
+    private UserService userService;
 
-    public User getUser() {
+    public UserPrincipal getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserPrincipal user) {
         this.user = user;
     }
 
     public void print() {
-        System.out.println("Enviar");
+        userService.login(user);
     }
 }
