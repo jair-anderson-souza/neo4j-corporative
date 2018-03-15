@@ -7,19 +7,45 @@ package io.github.jass2125.core.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 3:15:29 PM
+ * @since Mar 14, 2018 4:06:04 PM
  */
-@Embeddable
-public class Account implements Serializable {
+public class User implements Serializable {
 
+    private Long id;
+    private String name;
     private String email;
     private String password;
 
-    public Account() {
+    public User() {
+    }
+
+    public User(Long id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
@@ -41,7 +67,7 @@ public class Account implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.email);
+        hash = 73 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -56,13 +82,13 @@ public class Account implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Account other = (Account) obj;
-        return Objects.equals(this.email, other.email);
+        final User other = (User) obj;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public String toString() {
-        return "Account{" + "email=" + email + ", password=" + password + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + '}';
     }
 
 }
