@@ -11,5 +11,5 @@ package io.github.jass2125.core.entity;
  */
 public interface UserDao {
 
-    public UserPrincipal findUserByEmailAndPassword(UserPrincipal user);
+    public User findUserByEmailAndPassword(User user);
 }

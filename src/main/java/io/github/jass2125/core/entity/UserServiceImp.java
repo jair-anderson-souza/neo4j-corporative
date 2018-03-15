@@ -21,7 +21,7 @@ public class UserServiceImp implements UserService {
     private PasswordEncriptor passwordEncryptor;
 
     @Override
-    public UserPrincipal login(UserPrincipal user) {
+    public User login(User user) {
         try {
             String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
             user.setPassword(encryptedPassword);

@@ -20,19 +20,19 @@ import javax.inject.Named;
 public class UserController implements Serializable {
 
     @Inject
-    private UserPrincipal user;
+    private User user;
     @EJB
     private UserService userService;
 
-    public UserPrincipal getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(UserPrincipal user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public UserPrincipal login() {
+    public User login() {
         try {
             return userService.login(user);
         } catch (NoUserException e) {
@@ -41,7 +41,7 @@ public class UserController implements Serializable {
     }
 
     public String login2() {
-        UserPrincipal login = login();
+        User login = login();
         if (login != null) {
             return "home.xhtml?faces-redirect=true";
         }

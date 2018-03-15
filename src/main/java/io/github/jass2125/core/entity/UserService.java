@@ -11,5 +11,5 @@ package io.github.jass2125.core.entity;
  */
 public interface UserService {
 
-    public UserPrincipal login(UserPrincipal user);
+    public User login(User user);
 }
