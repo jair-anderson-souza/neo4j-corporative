@@ -11,7 +11,7 @@
             <h:inputText value="#{userController.user.email}"/>
             <h:outputLabel value="Senha"/>
             <h:inputSecret value="#{userController.user.password}"/>
-            <h:commandButton value="Login" actionListener="#{userController.print()}"/>
+            <h:commandButton value="Login" action="#{userController.login2()}"/>
         </h:form>
     </h:body>
 </html>
