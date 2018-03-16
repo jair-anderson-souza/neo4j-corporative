@@ -16,4 +16,8 @@ public interface UserService {
     public User login(User user);
 
     public List<User> loadFollowers(User user);
+
+    public List<Post> loadFeed(User user);
+
+    public List<User> loadNotFollowers(User user);
 }

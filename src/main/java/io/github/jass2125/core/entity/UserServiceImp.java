@@ -41,4 +41,22 @@ public class UserServiceImp implements UserService {
         }
     }
 
+    @Override
+    public List<Post> loadFeed(User user) {
+        try {
+            return userDao.findPosts(user);
+        } catch (NoUserException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public List<User> loadNotFollowers(User user) {
+        try {
+            return userDao.findNotFollowers(user);
+        } catch (NoUserException e) {
+            throw e;
+        }
+    }
+
 }
