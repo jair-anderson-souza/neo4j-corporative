@@ -5,6 +5,8 @@
  */
 package io.github.jass2125.core.entity;
 
+import java.util.List;
+
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  * @since Mar 14, 2018 4:58:42 PM
@@ -12,4 +14,6 @@ package io.github.jass2125.core.entity;
 public interface UserService {
 
     public User login(User user);
+
+    public List<User> loadFollowers(User user);
 }

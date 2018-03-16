@@ -5,6 +5,7 @@
  */
 package io.github.jass2125.core.entity;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -26,6 +27,15 @@ public class UserServiceImp implements UserService {
             String encryptedPassword = passwordEncryptor.encryptPassword(user.getPassword());
             user.setPassword(encryptedPassword);
             return userDao.findUserByEmailAndPassword(user);
+        } catch (NoUserException e) {
+            throw e;
+        }
+    }
+
+    @Override
+    public List<User> loadFollowers(User user) {
+        try {
+            return userDao.findFollowers(user);
         } catch (NoUserException e) {
             throw e;
         }
