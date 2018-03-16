@@ -21,6 +21,11 @@ public class Post implements Serializable {
     public Post() {
     }
 
+    public Post(Long id, String comment) {
+        this.id = id;
+        this.comment = comment;
+    }
+
     public Long getId() {
         return id;
     }
