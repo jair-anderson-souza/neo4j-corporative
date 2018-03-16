@@ -6,6 +6,7 @@
 package io.github.jass2125.core.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -67,5 +68,12 @@ public class UserController implements Serializable {
         User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         post.setUser(user);
         postService.save(post);
+    }
+
+    public List<User> getFollowers() {
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        List<User> listFollowers = userService.loadFollowers(user);
+        System.out.println(listFollowers.size());
+        return listFollowers;
     }
 }

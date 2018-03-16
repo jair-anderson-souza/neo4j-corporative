@@ -6,7 +6,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -18,7 +19,14 @@ and open the template in the editor.
             <h:inputTextarea value="#{userController.post.comment}"/>
             <h:commandButton action="#{userController.publishPost()}"/>
         </h:form>
-        <h1>Friend's List</h1>
+        <h:form>
+            <h1><h1>Follwing</h1></h1>
+            <h:selectOneMenu value="#{userController.followers}">
+            </h:selectOneMenu>
+            <h:inputTextarea value="#{userController.post.comment}"/>
+            <h:commandButton action="#{userController.publishPost()}"/>
+        </h:form>
+        
 
 
 

@@ -38,6 +38,7 @@ public class PostDaoImp implements PostDao {
             driver.close();
         }
     }
+    
 
     @Override
     public Integer persist(Post post) {
