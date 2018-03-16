@@ -60,7 +60,7 @@ public class UserController implements Serializable {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", login);
             return "home.xhtml?faces-redirect=true";
         }
-        return "index.xhtml";
+        return "index.xhtml?faces-redirect=true";
     }
 
     //pegar user da sessão
@@ -70,10 +70,26 @@ public class UserController implements Serializable {
         postService.save(post);
     }
 
+    public String exit() {
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(user);
+        return "index.xhtml?faces-redirect=true";
+    }
+
     public List<User> getFollowers() {
         User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         List<User> listFollowers = userService.loadFollowers(user);
-        System.out.println(listFollowers.size());
+        return listFollowers;
+    }
+
+//    public List<User> getNotFollowers() {
+//        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+//        List<User> listFollowers = userService.loadNotFollowers(user);
+//        return listFollowers;
+//    }
+    public List<Post> getFeed() {
+        User u = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        List<Post> listFollowers = userService.loadFeed(u);
         return listFollowers;
     }
 }
