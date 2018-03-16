@@ -81,4 +81,51 @@ public class UserDaoImp implements UserDao {
             return list;
         }
     }
+
+    @Override
+    public List<Post> findPosts(User user) {
+        List<Post> list = new ArrayList<>();
+        Driver driver = connection.openConnection();
+        try (Session session = driver.session()) {
+            StatementResult result = session.run("MATCH (U:User)-[PUBLISH]->(P:Post) WHERE ID(U) = $id  RETURN ID(P) as id, P.comment as comment", Values.parameters("id", user.getId()));
+            while (result.hasNext()) {
+                Record record = result.next();
+
+                Value value = record.get("id");
+                Long id = value.asLong();
+
+                value = record.get("comment");
+                String comment = value.asString();
+
+                list.add(new Post(id, comment));
+            }
+            return list;
+        }
+    }
+
+    @Override
+    public List<User> findNotFollowers(User user) {
+        List<User> list = new ArrayList<>();
+        Driver driver = connection.openConnection();
+        try (Session session = driver.session()) {
+            StatementResult result = session.run("MATCH NOT (U2:User)-[F:FOLLOWER]->(U1:User) WHERE ID(U1) = $id RETURN ID(U2) as id, U2.name as name, U2.email as email, U2.password as password", Values.parameters("id", user.getId()));
+            while (result.hasNext()) {
+                Record record = result.next();
+
+                Value value = record.get("id");
+                Long id = value.asLong();
+
+                value = record.get("name");
+                String name = value.asString();
+
+                value = record.get("email");
+                String email = value.asString();
+
+                value = record.get("password");
+                String password = value.asString();
+                list.add(new User(id, name, email, password));
+            }
+            return list;
+        }
+    }
 }
