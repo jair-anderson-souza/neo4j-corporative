@@ -7,31 +7,79 @@ and open the template in the editor.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-
-        <h:form>
-            <h1>Post Here</h1>
-            <h:inputTextarea value="#{userController.post.comment}"/>
-            <h:commandButton action="#{userController.publishPost()}"/>
-        </h:form>
-        <h:form>
-            <h1><h1>Follwing</h1></h1>
-            <h:selectOneMenu value="#{userController.followers}">
-            </h:selectOneMenu>
-            <h:inputTextarea value="#{userController.post.comment}"/>
-            <h:commandButton action="#{userController.publishPost()}"/>
-        </h:form>
+    </h:head>
+    <h:body>
         
+        <h:form style="text-align: center;" prependId="false" id="form">
+            <p:commandButton value="Exit" action="#{userController.exit}"/>
+            <h1 style="margin-top: 0; text-align: center;">Post Here</h1>
+            <p:inputTextarea style="text-align: center;" rows="10" cols="50" value="#{userController.post.comment}" queryDelay="750" minQueryLength="4" />
+            <br/>
+            <br/>
+            <p:commandButton value="Post" id="ajax" update="@form" actionListener="#{userController.publishPost()}" styleClass="ui-priority-primary" />
+            <br/>
+            <br/>
+            <br/>
+            <p:separator />
+            <br/>
+            <br/>
+            <br/>
+
+            <h1 style="text-align: center;">Feed</h1>
+            <p:repeat value="#{userController.feed}" var="post">
+                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Id:" />
+                            <h:outputText value="#{post.id}" style="font-weight: bold"/>
+                            <h:outputText value="Comment:" />
+                            <h:outputText value="#{post.comment}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+                <hr />
+            </p:repeat>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <h1>Followers</h1>
+            <p:dataScroller value="#{userController.followers}" var="follower" chunkSize="10">
+
+                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Id: " />
+                            <h:outputText value="#{follower.id}" style="font-weight: bold"/>
+
+                            <h:outputText value="Name: " />
+                            <h:outputText value="#{follower.name}" style="font-weight: bold"/>
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+            </p:dataScroller>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
 
-
+        </h:form>
 
         <!-- usuários cadastrados que não são amigos-->
         <!-- usuários cadastrados que são amigos-->
-    </body>
+    </h:body>
 </html>
