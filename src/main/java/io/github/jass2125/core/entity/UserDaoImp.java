@@ -5,6 +5,8 @@
  */
 package io.github.jass2125.core.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.neo4j.driver.v1.Driver;
@@ -52,5 +54,31 @@ public class UserDaoImp implements UserDao {
             driver.close();
         }
         return null;
+    }
+
+    @Override
+    public List<User> findFollowers(User user) {
+        List<User> list = new ArrayList<>();
+        Driver driver = connection.openConnection();
+        try (Session session = driver.session()) {
+            StatementResult result = session.run("MATCH (U2:User)-[F:FOLLOWER]->(U1:User) WHERE ID(U1) = $id  RETURN ID(U2) as id, U2.name as name, U2.email as email, U2.password as password", Values.parameters("id", user.getId()));
+            while (result.hasNext()) {
+                Record record = result.next();
+
+                Value value = record.get("id");
+                Long id = value.asLong();
+
+                value = record.get("name");
+                String name = value.asString();
+
+                value = record.get("email");
+                String email = value.asString();
+
+                value = record.get("password");
+                String password = value.asString();
+                list.add(new User(id, name, email, password));
+            }
+            return list;
+        }
     }
 }

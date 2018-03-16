@@ -5,6 +5,8 @@
  */
 package io.github.jass2125.core.entity;
 
+import java.util.List;
+
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  * @since Mar 15, 2018 3:46:14 PM
@@ -12,4 +14,6 @@ package io.github.jass2125.core.entity;
 public interface UserDao {
 
     public User findUserByEmailAndPassword(User user);
+
+    public List<User> findFollowers(User user);
 }
