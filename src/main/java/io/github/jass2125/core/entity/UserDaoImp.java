@@ -30,7 +30,7 @@ public class UserDaoImp implements UserDao {
     public User findUserByEmailAndPassword(User user) {
         Driver driver = connection.openConnection();
         try (Session session = driver.session()) {
-            StatementResult result = session.run("MATCH (U:User) WHERE U.email = $email AND U.password = $password RETURN U.id as id, U.name as name, U.email as email, U.password as password", Values.parameters("email", user.getEmail(), "password", user.getPassword()));
+            StatementResult result = session.run("MATCH (U:User) WHERE U.email = $email AND U.password = $password RETURN ID(U) as id, U.name as name, U.email as email, U.password as password", Values.parameters("email", user.getEmail(), "password", user.getPassword()));
             while (result.hasNext()) {
                 Record record = result.next();
 
