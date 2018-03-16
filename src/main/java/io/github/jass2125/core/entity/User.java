@@ -7,9 +7,6 @@ package io.github.jass2125.core.entity;
 
 import java.io.Serializable;
 import java.util.Objects;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>

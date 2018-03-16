@@ -8,6 +8,7 @@ package io.github.jass2125.core.entity;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -21,8 +22,12 @@ public class UserController implements Serializable {
 
     @Inject
     private User user;
+    @Inject
+    private Post post;
     @EJB
     private UserService userService;
+    @EJB
+    private PostService postService;
 
     public User getUser() {
         return user;
@@ -30,6 +35,14 @@ public class UserController implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     public User login() {
@@ -43,8 +56,16 @@ public class UserController implements Serializable {
     public String login2() {
         User login = login();
         if (login != null) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", login);
             return "home.xhtml?faces-redirect=true";
         }
         return "index.xhtml";
+    }
+
+    //pegar user da sessão
+    public void publishPost() {
+        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        post.setUser(user);
+        postService.save(post);
     }
 }
