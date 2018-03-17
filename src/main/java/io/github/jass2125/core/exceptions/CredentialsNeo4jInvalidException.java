@@ -5,15 +5,16 @@
  */
 package io.github.jass2125.core.exceptions;
 
+import org.neo4j.driver.v1.exceptions.AuthenticationException;
+
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 3:48:12 PM
+ * @since Mar 17, 2018 6:38:48 AM
  */
-public class NoUserException extends RuntimeException {
+public class CredentialsNeo4jInvalidException extends RuntimeException {
 
-    public NoUserException(Exception e, String msg) {
-    }
-    public NoUserException(String msg) {
+    public CredentialsNeo4jInvalidException(String msg, AuthenticationException e) {
+        super(msg, e);
     }
 
 }

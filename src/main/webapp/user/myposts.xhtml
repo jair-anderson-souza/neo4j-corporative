@@ -29,7 +29,7 @@ and open the template in the editor.
                             <div class="navbar-item">
                                 <div class="field is-grouped">
                                     <p class="control">
-                                        <h:commandButton class="button is-link" value="Exit" action="#{userController.exit}"/>
+                                        <h:commandButton class="button is-link" value="Exit" action="#{userController.exit()}"/>
                                     </p>
                                 </div>
                             </div>
@@ -40,7 +40,7 @@ and open the template in the editor.
                 <br/>
                 <br/>
                 <p class="title">My Posts</p>
-                <p:repeat value="#{userController.feed}" var="post">
+                <p:repeat value="#{userController.myPosts}" var="post">
                     <article class="media">
                         <div class="media-content">
                             <div class="content">

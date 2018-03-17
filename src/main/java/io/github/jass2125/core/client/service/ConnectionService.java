@@ -14,4 +14,6 @@ import org.neo4j.driver.v1.Driver;
 public interface ConnectionService {
 
     public Driver openConnection();
+
+    public void closeConnection(Driver driver);
 }

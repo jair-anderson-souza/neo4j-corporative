@@ -17,9 +17,9 @@ public interface UserDao {
 
     public User findUserByEmailAndPassword(User user);
 
-    public List<User> findFollowers(User user);
+    public List<User> findFollowersById(User user);
 
-    public List<Post> findPosts(User user);
+    public List<Post> findPostsById(User user);
 
-    public List<User> findNotFollowers(User user);
+    public List<User> findNotFollowersById(User user);
 }

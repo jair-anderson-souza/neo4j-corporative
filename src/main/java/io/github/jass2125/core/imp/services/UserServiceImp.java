@@ -11,6 +11,7 @@ import io.github.jass2125.core.client.service.UserService;
 import io.github.jass2125.core.util.PasswordEncriptor;
 import io.github.jass2125.core.entity.Post;
 import io.github.jass2125.core.entity.User;
+import java.util.Collections;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -41,27 +42,27 @@ public class UserServiceImp implements UserService {
     @Override
     public List<User> loadFollowers(User user) {
         try {
-            return userDao.findFollowers(user);
-        } catch (NoUserException e) {
-            throw e;
+            return userDao.findFollowersById(user);
+        } catch (Exception e) {
+            return Collections.EMPTY_LIST;
         }
     }
 
     @Override
     public List<Post> loadFeed(User user) {
         try {
-            return userDao.findPosts(user);
-        } catch (NoUserException e) {
-            throw e;
+            return userDao.findPostsById(user);
+        } catch (Exception e) {
+            return Collections.EMPTY_LIST;
         }
     }
 
     @Override
     public List<User> loadNotFollowers(User user) {
         try {
-            return userDao.findNotFollowers(user);
-        } catch (NoUserException e) {
-            throw e;
+            return userDao.findNotFollowersById(user);
+        } catch (Exception e) {
+            return Collections.EMPTY_LIST;
         }
     }
 

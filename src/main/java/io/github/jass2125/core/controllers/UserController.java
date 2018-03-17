@@ -13,6 +13,7 @@ import io.github.jass2125.core.client.service.UserService;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -38,8 +39,14 @@ public class UserController implements Serializable {
     private PostService postService;
     @Inject
     private Map<String, Object> session;
+    private User userOn;
 
     public UserController() {
+    }
+
+    @PostConstruct
+    public void init() {
+        this.userOn = (User) session.get("user");
     }
 
     public User getUser() {
@@ -77,8 +84,7 @@ public class UserController implements Serializable {
     }
 
     public void publishPost() {
-        User user = (User) session.get("user");
-        post.setUser(user);
+        post.setUser(userOn);
         postService.save(post);
     }
 
@@ -88,14 +94,10 @@ public class UserController implements Serializable {
     }
 
     public List<User> getFollowers() {
-        User user = (User) session.get("user");
-        List<User> listFollowers = userService.loadFollowers(user);
-        return listFollowers;
+        return userService.loadFollowers(userOn);
     }
 
-    public List<Post> getFeed() {
-        User u = (User) session.get("user");
-        List<Post> listFollowers = userService.loadFeed(u);
-        return listFollowers;
+    public List<Post> getMyPosts() {
+        return userService.loadFeed(userOn);
     }
 }

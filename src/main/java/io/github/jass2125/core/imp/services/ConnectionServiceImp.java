@@ -10,7 +10,9 @@ import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import io.github.jass2125.core.client.service.ConnectionService;
+import io.github.jass2125.core.exceptions.CredentialsNeo4jInvalidException;
 import org.neo4j.driver.v1.AuthToken;
+import org.neo4j.driver.v1.exceptions.AuthenticationException;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -24,9 +26,14 @@ public class ConnectionServiceImp implements ConnectionService {
 
     @Override
     public Driver openConnection() {
-        return GraphDatabase.driver(uri, authTokens);
+        try {
+            return GraphDatabase.driver(uri, authTokens);
+        } catch (AuthenticationException e) {
+            throw new CredentialsNeo4jInvalidException("Credentials invalid", e);
+        }
     }
 
+    @Override
     public void closeConnection(Driver driver) {
         driver.close();
     }
