@@ -87,7 +87,7 @@ public class UserDaoImp implements UserDao {
         List<Post> list = new ArrayList<>();
         Driver driver = connection.openConnection();
         try (Session session = driver.session()) {
-            StatementResult result = session.run("MATCH (U:User)-[PUBLISH]->(P:Post) WHERE ID(U) = $id  RETURN ID(P) as id, P.comment as comment", Values.parameters("id", user.getId()));
+            StatementResult result = session.run("MATCH (U:User)-[PUBLISH]->(P:Post) WHERE ID(U) = $id  RETURN ID(P) as id, P.comment as comment, U.name as name", Values.parameters("id", user.getId()));
             while (result.hasNext()) {
                 Record record = result.next();
 
@@ -97,7 +97,10 @@ public class UserDaoImp implements UserDao {
                 value = record.get("comment");
                 String comment = value.asString();
 
-                list.add(new Post(id, comment));
+                value = record.get("name");
+                String name = value.asString();
+
+                list.add(new Post(id, comment, name));
             }
             return list;
         }
