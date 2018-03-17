@@ -21,9 +21,10 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(Long id, String comment) {
+    public Post(Long id, String comment, String name) {
         this.id = id;
         this.comment = comment;
+        this.user = new User(name);
     }
 
     public Long getId() {
