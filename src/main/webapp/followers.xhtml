@@ -9,106 +9,65 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Followers</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="bulma.css"/>
-        <script type="text/javascript" src="bulma-font-awesome.css"/>
+        <link rel="stylesheet" href="css/bulma.css"/>
+        <script type="text/javascript" src="css/bulma-font-awesome.css"/>
     </h:head>
     <h:body>
-        <nav class="navbar is-transparent">
-            <div id="navbarExampleTransparentExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="home.xhtml">Home</a>
-                    <a class="navbar-item" href="feed.xhtml">Feed</a>
-                    <a class="navbar-item" href="home.xhtml">Followers</a>
-                </div>
+        <div class="container">
+            <h:form style="text-align: center;" prependId="false" id="form">
+                <nav class="navbar is-transparent">
+                    <div id="navbarExampleTransparentExample" class="navbar-menu">
+                        <div class="navbar-start">
+                            <a class="navbar-item" href="home.xhtml">Home</a>
+                            <a class="navbar-item" href="myposts.xhtml">My Posts</a>
+                            <a class="navbar-item" href="followers.xhtml">Followers</a>
+                        </div>
 
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <p:commandButton class="button is-link" value="Exit" action="#{userController.exit}"/>
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    <span>Exit</span>
-                                </a>
-                            </p>
+                        <div class="navbar-end">
+                            <div class="navbar-item">
+                                <div class="field is-grouped">
+                                    <p class="control">
+                                        <a class="button is-link" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                                            <span class="icon">
+                                                <i class="fas fa-times"></i>
+                                            </span>
+                                            <span>Exit</span>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </nav>
-
-        <h:form style="text-align: center;" prependId="false" id="form">
-            <p:commandButton value="Exit" action="#{userController.exit}"/>
-            <h1 style="margin-top: 0; text-align: center;">Post Here</h1>
-            <p:inputTextarea style="text-align: center;" rows="10" cols="50" value="#{userController.post.comment}" queryDelay="750" minQueryLength="4" />
-            <br/>
-            <br/>
-
-
-
-            <p:commandButton value="Post" id="ajax" update="@form" actionListener="#{userController.publishPost()}" styleClass="ui-priority-primary" />
-            <br/>
-            <br/>
-            <br/>
-            <p:separator />
-            <br/>
-            <br/>
-            <br/>
-
-            <h1 style="text-align: center;">Feed</h1>
-            <p:repeat value="#{userController.feed}" var="post">
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Id:" />
-                            <h:outputText value="#{post.id}" style="font-weight: bold"/>
-                            <h:outputText value="Comment:" />
-                            <h:outputText value="#{post.comment}" style="font-weight: bold"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </h:panelGrid>
-                <hr />
-            </p:repeat>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            <h1>Followers</h1>
-            <p:dataScroller value="#{userController.followers}" var="follower" chunkSize="10">
-
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Id: " />
-                            <h:outputText value="#{follower.id}" style="font-weight: bold"/>
-
-                            <h:outputText value="Name: " />
-                            <h:outputText value="#{follower.name}" style="font-weight: bold"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </h:panelGrid>
-            </p:dataScroller>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-
-        </h:form>
+                </nav>
+                <br/>
+                <br/>
+                <br/>
+                <p class="title">Followers</p>
+                <p:repeat value="#{userController.followers}" var="follower">
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                <img src="user.png"/>
+                            </p>
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <h:outputLabel value="#{follower.name}"/>
+                                <br/>
+                                <h:outputLabel value="#{follower.email}"/>
+                            </div>
+                        </div>
+                        <div class="media-right">
+                            <button class="delete"></button>
+                        </div>
+                    </article>
+                </p:repeat>
+            </h:form>
+        </div>
 
         <!-- usuários cadastrados que não são amigos-->
         <!-- usuários cadastrados que são amigos-->
     </h:body>
-
 </html>

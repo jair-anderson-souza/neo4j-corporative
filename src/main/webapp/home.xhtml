@@ -10,38 +10,36 @@ and open the template in the editor.
     <h:head>
         <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="bulma.css"/>
-        <script type="text/javascript" src="bulma-font-awesome.css"/>
+        <link rel="stylesheet" href="css/bulma.css"/>
+        <script type="text/javascript" src="css/bulma-font-awesome.css"/>
     </h:head>
     <h:body>
-        <h:form prependId="false">
+        <div class="container">
+            <h:form prependId="false">
 
-            <nav class="navbar is-transparent">
-                <div id="navbarExampleTransparentExample" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item" href="home.xhtml">Home</a>
-                        <a class="navbar-item" href="myposts.xhtml">My Posts</a>
-                        <a class="navbar-item" href="home.xhtml">Followers</a>
-                    </div>
+                <nav class="navbar is-transparent">
+                    <div id="navbarExampleTransparentExample" class="navbar-menu">
+                        <div class="navbar-start">
+                            <a class="navbar-item" href="home.xhtml">Home</a>
+                            <a class="navbar-item" href="myposts.xhtml">My Posts</a>
+                            <a class="navbar-item" href="followers.xhtml">Followers</a>
+                        </div>
 
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="field is-grouped">
-                                <p class="control">
-                                    <h:commandButton class="button is-link" value="Exit" action="#{userController.exit}"/>
-                                </p>
+                        <div class="navbar-end">
+                            <div class="navbar-item">
+                                <div class="field is-grouped">
+                                    <p class="control">
+                                        <h:commandButton class="button is-link" value="Exit" action="#{userController.exit}"/>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <div class="container">
+                <br/>
+                <br/>
+                <br/>
                 <p class="title">Do Post</p>
                 <article class="media">
                     <div class="media-content">
@@ -59,7 +57,7 @@ and open the template in the editor.
                         </nav>
                     </div>
                 </article>
-            </div>
-        </h:form>
+            </h:form>
+        </div>
     </h:body>
 </html>
