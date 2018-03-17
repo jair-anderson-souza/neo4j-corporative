@@ -6,109 +6,60 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>TODO supply a title</title>
+        <title>Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="bulma.css"/>
         <script type="text/javascript" src="bulma-font-awesome.css"/>
     </h:head>
     <h:body>
-        <nav class="navbar is-transparent">
-            <div id="navbarExampleTransparentExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item" href="home.xhtml">Home</a>
-                    <a class="navbar-item" href="home.xhtml">Feed</a>
-                    <a class="navbar-item" href="home.xhtml">Followers</a>
-                </div>
+        <h:form prependId="false">
 
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="field is-grouped">
-                            <p class="control">
-                                <a class="button is-link" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                    <span>Exit</span>
-                                </a>
-                            </p>
+            <nav class="navbar is-transparent">
+                <div id="navbarExampleTransparentExample" class="navbar-menu">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="home.xhtml">Home</a>
+                        <a class="navbar-item" href="myposts.xhtml">My Posts</a>
+                        <a class="navbar-item" href="home.xhtml">Followers</a>
+                    </div>
+
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="field is-grouped">
+                                <p class="control">
+                                    <h:commandButton class="button is-link" value="Exit" action="#{userController.exit}"/>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </nav>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="container">
+                <p class="title">Do Post</p>
+                <article class="media">
+                    <div class="media-content">
+                        <div class="field">
+                            <p class="control">
+                                <h:inputTextarea styleClass="textarea" value="#{userController.post.comment}" />
+                            </p>
+                        </div>
+                        <nav class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <h:commandButton styleClass="button is-info" value="Post" id="ajax" actionListener="#{userController.publishPost()}" />
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
             </div>
-        </nav>
-
-        <h:form style="text-align: center;" prependId="false" id="form">
-            <p:commandButton value="Exit" action="#{userController.exit}"/>
-            <h1 style="margin-top: 0; text-align: center;">Post Here</h1>
-            <p:inputTextarea style="text-align: center;" rows="10" cols="50" value="#{userController.post.comment}" queryDelay="750" minQueryLength="4" />
-            <br/>
-            <br/>
-
-
-
-            <p:commandButton value="Post" id="ajax" update="@form" actionListener="#{userController.publishPost()}" styleClass="ui-priority-primary" />
-            <br/>
-            <br/>
-            <br/>
-            <p:separator />
-            <br/>
-            <br/>
-            <br/>
-
-            <h1 style="text-align: center;">Feed</h1>
-            <p:repeat value="#{userController.feed}" var="post">
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Id:" />
-                            <h:outputText value="#{post.id}" style="font-weight: bold"/>
-                            <h:outputText value="Comment:" />
-                            <h:outputText value="#{post.comment}" style="font-weight: bold"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </h:panelGrid>
-                <hr />
-            </p:repeat>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-            <h1>Followers</h1>
-            <p:dataScroller value="#{userController.followers}" var="follower" chunkSize="10">
-
-                <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
-
-                    <p:outputPanel>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Id: " />
-                            <h:outputText value="#{follower.id}" style="font-weight: bold"/>
-
-                            <h:outputText value="Name: " />
-                            <h:outputText value="#{follower.name}" style="font-weight: bold"/>
-                        </h:panelGrid>
-                    </p:outputPanel>
-                </h:panelGrid>
-            </p:dataScroller>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
-
         </h:form>
-
-        <!-- usuários cadastrados que não são amigos-->
-        <!-- usuários cadastrados que são amigos-->
     </h:body>
 </html>
