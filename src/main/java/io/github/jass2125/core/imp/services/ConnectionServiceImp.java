@@ -10,6 +10,7 @@ import org.neo4j.driver.v1.AuthTokens;
 import org.neo4j.driver.v1.Driver;
 import org.neo4j.driver.v1.GraphDatabase;
 import io.github.jass2125.core.client.service.ConnectionService;
+import org.neo4j.driver.v1.AuthToken;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -18,17 +19,16 @@ import io.github.jass2125.core.client.service.ConnectionService;
 @Stateless
 public class ConnectionServiceImp implements ConnectionService {
 
+    private final String uri = "bolt://localhost:7687";
+    private final AuthToken authTokens = AuthTokens.basic("neo4j", "123");
+
     @Override
     public Driver openConnection() {
-        Driver driver = GraphDatabase.driver("bolt://localhost:7687", AuthTokens.basic("neo4j", "123"));
-        return driver;
-//        try (Session session = driver.session()) {
-//            //            StatementResult result =
-//            StatementResult result = session.
-//                    run("CREATE (p:Produto{codigo : $codigo, descricao : $descricao, preco : $preco}) RETURN id(p) as id",
-//                            Values.parameters("codigo", 2, "descricao", "Feijão", "preco", 5.50f));
-//            System.out.println(result.single().get("id"));
-//        } finally {
-//            driver.close();
+        return GraphDatabase.driver(uri, authTokens);
     }
+
+    public void closeConnection(Driver driver) {
+        driver.close();
+    }
+
 }
