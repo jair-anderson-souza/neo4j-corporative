@@ -22,4 +22,6 @@ public interface UserService {
     public List<Post> loadFeed(User user);
 
     public List<User> loadNotFollowers(User user);
+
+    public void register(User newUser);
 }

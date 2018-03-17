@@ -66,4 +66,22 @@ public class UserServiceImp implements UserService {
         }
     }
 
+    @Override
+    public void register(User newUser) {
+        try {
+            verifyEmailDuplicate(newUser.getEmail());
+            userDao.save(newUser);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void verifyEmailDuplicate(String email) {
+        try {
+            userDao.findByEmail(email);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
 }

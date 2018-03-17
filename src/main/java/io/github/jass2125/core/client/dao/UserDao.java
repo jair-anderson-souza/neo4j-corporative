@@ -22,4 +22,8 @@ public interface UserDao {
     public List<Post> findPostsById(User user);
 
     public List<User> findNotFollowersById(User user);
+
+    public void save(User user);
+
+    public void findByEmail(String email);
 }

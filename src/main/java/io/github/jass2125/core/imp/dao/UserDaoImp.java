@@ -147,4 +147,25 @@ public class UserDaoImp implements UserDao {
             throw new RuntimeException("Method findNotFollowersById() in UserDaoImpl");
         }
     }
+
+    @Override
+    public void save(User user) {
+        try (Session session = driver.session()) {
+            StatementResult result = session.run("CREATE (U:User { name : $name, email : $email, password : $password}) RETURN U", Values.parameters("name", user.getName(), "email", user.getEmail(), "password", user.getPassword()));
+        } catch (Exception e) {
+            throw new RuntimeException("Method persist() in PostDaoImpl");
+        }
+    }
+
+    @Override
+    public void findByEmail(String email) {
+        try (Session session = driver.session()) {
+            StatementResult result = session.run("match(U:User) where U.email = $name RETURN U.email as email", Values.parameters("email", email));
+            if (result.hasNext()) {
+                throw new EmailDuplicateException("Email duplicate, type other.");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Method findByEmail() in PostDaoImpl");
+        }
+    }
 }

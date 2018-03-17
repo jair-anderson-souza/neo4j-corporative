@@ -16,8 +16,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -31,6 +29,8 @@ public class UserController implements Serializable {
 
     @Inject
     private User user;
+    @Inject
+    private User newUser;
     @Inject
     private Post post;
     @EJB
@@ -65,6 +65,14 @@ public class UserController implements Serializable {
         this.post = post;
     }
 
+    public User getNewUser() {
+        return newUser;
+    }
+
+    public void setNewUser(User newUser) {
+        this.newUser = newUser;
+    }
+
     public User login() {
         try {
             return userService.login(user);
@@ -79,6 +87,20 @@ public class UserController implements Serializable {
         if (userLogin != null) {
             session.put("user", userLogin);
             return "user/home.xhtml?faces-redirect=true";
+        }
+        return "user/home.xhtml?faces-redirect=true";
+    }
+
+    public String register() {
+        try {
+            userService.register(newUser);
+        } catch (Exception e) {
+
+//        if (userLogin != null) {
+//            session.put("user", userLogin);
+//            return "user/home.xhtml?faces-redirect=true";
+//        }
+//        return "user/home.xhtml?faces-redirect=true";
         }
         return "user/home.xhtml?faces-redirect=true";
     }

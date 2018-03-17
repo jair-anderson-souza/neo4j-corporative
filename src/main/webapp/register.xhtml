@@ -17,25 +17,31 @@
                             Neo4J Example
                         </h1>
                         <div class="field">
+                            <h:outputLabel class="label" value="Name"/>
+                            <div class="control">
+                                <h:inputText class="input" value="#{userController.newUser.name}"/>
+                            </div>
+                        </div>
+                        <div class="field">
                             <h:outputLabel class="label" value="Email"/>
                             <div class="control">
-                                <h:inputText class="input" value="#{userController.user.email}"/>
+                                <h:inputText class="input" value="#{userController.newUser.email}"/>
                             </div>
                         </div>
                         <div class="field">
                             <h:outputLabel class="label" value="Password"/>
                             <div class="control">
-                                <h:inputSecret class="input" value="#{userController.user.password}"/>
+                                <h:inputSecret class="input" value="#{userController.newUser.password}"/>
                             </div>
                         </div>
                         <div class="field">
                             <div class="control">
                                 <label class="checkbox">
-                                    <a href="register.xhtml">Register</a>
+                                    <a href="index.xhtml">Login</a>
                                 </label>
                             </div>
                         </div>
-                        <h:commandButton class="button is-success" value="Login" action="#{userController.redirectTo()}"/>
+                        <h:commandButton class="button is-success" value="Register" action="#{userController.register()}"/>
                     </div>
                 </div>
             </section>
