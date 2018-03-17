@@ -15,25 +15,29 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  */
-@WebFilter(value = "sessionFilter", urlPatterns = {"/home.xhtml", "/followers.xhtml", "/myposts.xhtml"})
+@WebFilter(value = "sessionFilter", urlPatterns = {"/user/*"})
 public class SessionFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletResponse resp = (HttpServletResponse) response;
-        User user = (User) req.getSession().getAttribute("user");
-        if (user != null) {
+        HttpServletRequest req = ((HttpServletRequest) request);
+        HttpSession session = req.getSession();
+        HttpServletResponse resp = ((HttpServletResponse) response);
+        String contextPath = req.getContextPath();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            resp.sendRedirect(contextPath + "/index.xhtml");
             chain.doFilter(request, response);
         } else {
-            resp.sendRedirect("index.xhtml");
             chain.doFilter(request, response);
         }
+
     }
 
     @Override
