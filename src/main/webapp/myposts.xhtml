@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>TODO supply a title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="bulma.css"/>
+        <script type="text/javascript" src="bulma-font-awesome.css"/>
+    </h:head>
+    <h:body>
+        <nav class="navbar is-transparent">
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="home.xhtml">Home</a>
+                    <a class="navbar-item" href="home.xhtml">My Posts</a>
+                    <a class="navbar-item" href="home.xhtml">Followers</a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button is-link" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                                    <span class="icon">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <span>Exit</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <h:form style="text-align: center;" prependId="false" id="form">
+            <p:repeat value="#{userController.feed}" var="post">
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-64x64">
+                            <img src="user.png"/>
+                        </p>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <h:outputLabel value="#{post.user.name}"/>
+                            <br/>
+                            <h:outputLabel value="#{post.comment}"/>
+                        </div>
+                    </div>
+                    <div class="media-right">
+                        <button class="delete"></button>
+                    </div>
+                </article>
+            </p:repeat>
+
+
+
+        </h:form>
+
+        <!-- usuários cadastrados que não são amigos-->
+        <!-- usuários cadastrados que são amigos-->
+    </h:body>
+</html>
