@@ -29,6 +29,8 @@ public class UserController implements Serializable {
     private UserService userService;
     @EJB
     private PostService postService;
+    @Inject
+    private FacesContext context;
 
     public User getUser() {
         return user;
@@ -57,27 +59,30 @@ public class UserController implements Serializable {
     public String login2() {
         User login = login();
         if (login != null) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user", login);
-            return "home.xhtml?faces-redirect=true";
+            context.getExternalContext().getSessionMap().put("user", login);
+//            NavigationHandler nav = context.getApplication().getNavigationHandler();
+//            nav.handleNavigation(context, null, "/user/home.xhtml?faces-redirect=true");
+            return "user/home.xhtml?faces-redirect=true";
         }
-        return "index.xhtml?faces-redirect=true";
+//        NavigationHandler nav = context.getApplication().getNavigationHandler();
+//        nav.handleNavigation(context, null, "/user/home.xhtml?faces-redirect=true");
+        return "user/home.xhtml?faces-redirect=true";
     }
 
     //pegar user da sessão
     public void publishPost() {
-        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        User user = (User) context.getExternalContext().getSessionMap().get("user");
         post.setUser(user);
         postService.save(post);
     }
 
     public String exit() {
-        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove(user);
-        return "index.xhtml?faces-redirect=true";
+        context.getExternalContext().getSessionMap().clear();
+        return "/index.xhtml?faces-redirect=true";
     }
 
     public List<User> getFollowers() {
-        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        User user = (User) context.getExternalContext().getSessionMap().get("user");
         List<User> listFollowers = userService.loadFollowers(user);
         return listFollowers;
     }
@@ -88,7 +93,7 @@ public class UserController implements Serializable {
 //        return listFollowers;
 //    }
     public List<Post> getFeed() {
-        User u = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        User u = (User) context.getExternalContext().getSessionMap().get("user");
         List<Post> listFollowers = userService.loadFeed(u);
         return listFollowers;
     }
