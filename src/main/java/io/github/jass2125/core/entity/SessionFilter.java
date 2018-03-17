@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  */
-@WebFilter(filterName = "sessionFilter", urlPatterns = {"/home.xhtml"})
+@WebFilter(value = "sessionFilter", urlPatterns = {"/home.xhtml", "/followers.xhtml", "/myposts.xhtml"})
 public class SessionFilter implements Filter {
 
     @Override
