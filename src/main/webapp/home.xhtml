@@ -12,18 +12,44 @@ and open the template in the editor.
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="bulma.css"/>
+        <script type="text/javascript" src="bulma-font-awesome.css"/>
     </h:head>
     <h:body>
-        
+        <nav class="navbar is-transparent">
+            <div id="navbarExampleTransparentExample" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="home.xhtml">Home</a>
+                    <a class="navbar-item" href="home.xhtml">Feed</a>
+                    <a class="navbar-item" href="home.xhtml">Followers</a>
+                </div>
+
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <div class="field is-grouped">
+                            <p class="control">
+                                <a class="button is-link" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+                                    <span class="icon">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <span>Exit</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
         <h:form style="text-align: center;" prependId="false" id="form">
             <p:commandButton value="Exit" action="#{userController.exit}"/>
             <h1 style="margin-top: 0; text-align: center;">Post Here</h1>
             <p:inputTextarea style="text-align: center;" rows="10" cols="50" value="#{userController.post.comment}" queryDelay="750" minQueryLength="4" />
             <br/>
             <br/>
-            
-            
-            
+
+
+
             <p:commandButton value="Post" id="ajax" update="@form" actionListener="#{userController.publishPost()}" styleClass="ui-priority-primary" />
             <br/>
             <br/>
