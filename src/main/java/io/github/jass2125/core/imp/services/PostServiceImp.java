@@ -23,7 +23,11 @@ public class PostServiceImp implements PostService {
 
     @Override
     public void save(Post post) {
-        postDao.saveRelationship(post);;
+        try {
+            postDao.saveRelationship(post);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
 }
