@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="../css/bulma.css"/>
+        <script type="text/javascript" src="../css/bulma-font-awesome.css"/>
+    </h:head>
+    <h:body>
+        <div class="container">
+            <h:form prependId="false">
+
+                <nav class="navbar is-transparent">
+                    <div id="navbarExampleTransparentExample" class="navbar-menu">
+                        <div class="navbar-start">
+                            <a class="navbar-item" href="home.xhtml">Home</a>
+                            <a class="navbar-item" href="myposts.xhtml">My Posts</a>
+                            <a class="navbar-item" href="followers.xhtml">Followers</a>
+                        </div>
+
+                        <div class="navbar-end">
+                            <div class="navbar-item">
+                                <div class="field is-grouped">
+                                    <p class="control">
+                                        <h:commandButton class="button is-link" value="Exit" action="#{userController.exit()}"/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <br/>
+                <br/>
+                <br/>
+                <p class="title">Do Post</p>
+                <article class="media">
+                    <div class="media-content">
+                        <div class="field">
+                            <p class="control">
+                                <h:inputTextarea styleClass="textarea" value="#{userController.post.comment}" />
+                            </p>
+                        </div>
+                        <nav class="level">
+                            <div class="level-left">
+                                <div class="level-item">
+                                    <h:commandButton styleClass="button is-info" value="Post" id="ajax" actionListener="#{userController.publishPost()}" />
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </article>
+            </h:form>
+        </div>
+    </h:body>
+</html>
