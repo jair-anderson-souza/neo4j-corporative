@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.client.service;
+
+import org.neo4j.driver.v1.Driver;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 3:25:49 PM
+ * @since Mar 15, 2018 4:25:05 PM
  */
-public interface PasswordEncriptor {
+public interface ConnectionService {
 
-    public String encryptPassword(String password);
-
-    public boolean comparatePassword(String passwordUser, String passwordForm);
+    public Driver openConnection();
 }

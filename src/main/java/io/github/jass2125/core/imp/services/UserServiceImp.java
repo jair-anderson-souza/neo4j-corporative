@@ -3,8 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.imp.services;
 
+import io.github.jass2125.core.client.dao.UserDao;
+import io.github.jass2125.core.exceptions.NoUserException;
+import io.github.jass2125.core.client.service.UserService;
+import io.github.jass2125.core.util.PasswordEncriptor;
+import io.github.jass2125.core.entity.Post;
+import io.github.jass2125.core.entity.User;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;

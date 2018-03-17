@@ -1,10 +1,11 @@
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.filters;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import io.github.jass2125.core.entity.User;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;

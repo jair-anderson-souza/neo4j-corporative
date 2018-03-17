@@ -3,12 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.controllers;
 
+import io.github.jass2125.core.exceptions.NoUserException;
+import io.github.jass2125.core.entity.Post;
+import io.github.jass2125.core.client.service.PostService;
+import io.github.jass2125.core.entity.User;
+import io.github.jass2125.core.client.service.UserService;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,7 +37,10 @@ public class UserController implements Serializable {
     @EJB
     private PostService postService;
     @Inject
-    private FacesContext context;
+    private Map<String, Object> session;
+
+    public UserController() {
+    }
 
     public User getUser() {
         return user;
@@ -52,48 +62,39 @@ public class UserController implements Serializable {
         try {
             return userService.login(user);
         } catch (NoUserException e) {
+
         }
         return null;
     }
 
-    public String login2() {
-        User login = login();
-        if (login != null) {
-            context.getExternalContext().getSessionMap().put("user", login);
-//            NavigationHandler nav = context.getApplication().getNavigationHandler();
-//            nav.handleNavigation(context, null, "/user/home.xhtml?faces-redirect=true");
+    public String redirectTo() {
+        User userLogin = login();
+        if (userLogin != null) {
+            session.put("user", userLogin);
             return "user/home.xhtml?faces-redirect=true";
         }
-//        NavigationHandler nav = context.getApplication().getNavigationHandler();
-//        nav.handleNavigation(context, null, "/user/home.xhtml?faces-redirect=true");
         return "user/home.xhtml?faces-redirect=true";
     }
 
-    //pegar user da sessão
     public void publishPost() {
-        User user = (User) context.getExternalContext().getSessionMap().get("user");
+        User user = (User) session.get("user");
         post.setUser(user);
         postService.save(post);
     }
 
     public String exit() {
-        context.getExternalContext().getSessionMap().clear();
+        session.clear();
         return "/index.xhtml?faces-redirect=true";
     }
 
     public List<User> getFollowers() {
-        User user = (User) context.getExternalContext().getSessionMap().get("user");
+        User user = (User) session.get("user");
         List<User> listFollowers = userService.loadFollowers(user);
         return listFollowers;
     }
 
-//    public List<User> getNotFollowers() {
-//        User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-//        List<User> listFollowers = userService.loadNotFollowers(user);
-//        return listFollowers;
-//    }
     public List<Post> getFeed() {
-        User u = (User) context.getExternalContext().getSessionMap().get("user");
+        User u = (User) session.get("user");
         List<Post> listFollowers = userService.loadFeed(u);
         return listFollowers;
     }

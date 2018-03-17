@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.exceptions;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 7:14:17 PM 
+ * @since Mar 15, 2018 3:29:59 PM 
  */
-public interface PostService {
+public class EncodingException extends RuntimeException {
 
-    public void save(Post post);
+    public EncodingException(Exception e, String msg) {
+    }
 
 }

@@ -1,5 +1,7 @@
+package io.github.jass2125.core.produces;
 
 import java.io.Serializable;
+import java.util.Map;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 
@@ -12,8 +14,8 @@ import javax.faces.context.FacesContext;
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
  * @since Mar 17, 2018 5:28:39 AM
  */
-public class FacesContextProduces implements Serializable {
+public class SessionMapProduces implements Serializable {
 
     @Produces
-    private FacesContext context = FacesContext.getCurrentInstance();
+    private Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 }

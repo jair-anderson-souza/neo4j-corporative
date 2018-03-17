@@ -1,4 +1,4 @@
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.filters;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

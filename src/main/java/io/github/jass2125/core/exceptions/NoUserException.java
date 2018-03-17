@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
-
-import org.neo4j.driver.v1.Driver;
+package io.github.jass2125.core.exceptions;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 4:25:05 PM
+ * @since Mar 15, 2018 3:48:12 PM
  */
-public interface Connection {
+public class NoUserException extends RuntimeException {
 
-    public Driver openConnection();
+    public NoUserException(Exception e, String msg) {
+    }
+
 }

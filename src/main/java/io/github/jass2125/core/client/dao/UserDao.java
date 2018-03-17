@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.client.dao;
 
+import io.github.jass2125.core.entity.Post;
+import io.github.jass2125.core.entity.User;
 import java.util.List;
 
 /**

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.util;
 
+import io.github.jass2125.core.exceptions.CryptographyException;
+import io.github.jass2125.core.exceptions.EncodingException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

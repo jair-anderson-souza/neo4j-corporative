@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.imp.dao;
 
+import io.github.jass2125.core.client.dao.PostDao;
+import io.github.jass2125.core.entity.Post;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.neo4j.driver.v1.Driver;
@@ -12,6 +14,7 @@ import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.Session;
 import org.neo4j.driver.v1.StatementResult;
 import org.neo4j.driver.v1.Values;
+import io.github.jass2125.core.client.service.ConnectionService;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
@@ -21,7 +24,7 @@ import org.neo4j.driver.v1.Values;
 public class PostDaoImp implements PostDao {
 
     @EJB
-    private Connection connection;
+    private ConnectionService connection;
     @Override
     public void saveRelationship(Post post) {
         Integer postId = persist(post);

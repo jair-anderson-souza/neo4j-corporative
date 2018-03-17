@@ -4,14 +4,15 @@
  * and open the template in the editor.
  */
 
-package io.github.jass2125.core.entity;
+package io.github.jass2125.core.exceptions;
 
 /**
  * @author Anderson Souza <jair_anderson_bs@hotmail.com>
- * @since Mar 15, 2018 3:54:48 PM 
+ * @since Mar 15, 2018 3:24:19 PM 
  */
-public interface GeneratorAlgorithmCryptography {
+public class CryptographyException extends RuntimeException {
 
-    public String digest(String password);
+    public CryptographyException(Exception e, String msg) {
+    }
 
 }
