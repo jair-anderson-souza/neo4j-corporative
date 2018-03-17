@@ -9,14 +9,13 @@
         <script type="text/javascript" src="css/bulma-font-awesome.css"></script>
     </h:head>   
     <h:body>
-
-        <section class="hero">
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">
-                        Neo4J Example
-                    </h1>
-                    <h:form>
+        <h:form>
+            <section class="hero">
+                <div class="hero-body">
+                    <div class="container">
+                        <h1 class="title">
+                            Neo4J Example
+                        </h1>
                         <div class="field">
                             <h:outputLabel class="label" value="Email"/>
                             <div class="control">
@@ -29,13 +28,12 @@
                                 <h:inputSecret class="input" value="#{userController.user.password}"/>
                             </div>
                         </div>
-
-                        <h:commandButton class="button is-success" value="Login" action="#{userController.login2()}"/>
-                    </h:form>
+                        <h:commandButton class="button is-success" value="Login" action="#{userController.redirectTo()}"/>
+                    </div>
                 </div>
-            </div>
-        </section>
-        <br />
+            </section>
+            <br />
+        </h:form>
     </h:body>
 </html>
 
