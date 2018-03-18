@@ -14,3 +14,6 @@
   	<p>Find class **Loader** and run it <br/>
     email: user@user.com <br/>
     password: 123</p>
+
+**Fourth Step** </br>
+	<p>Deploy it in Glassfish 4 Server</p>
